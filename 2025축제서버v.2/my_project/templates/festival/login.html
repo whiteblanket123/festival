@@ -1,0 +1,93 @@
+
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>login page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        #loginFormContainer {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        
+        }
+        #loginForm {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            
+        }
+        #loginForm label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        #loginForm input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        #loginForm button {
+            width: 100%;
+            padding: 0.5rem;
+            background-color: #7eafff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        #loginForm button:hover {
+            background-color: #5c84c4;
+        }
+        h1 {
+            color: #333;
+        }
+        .footer-text {
+            position: absolute;
+            bottom: 30px; /* 원하는 위치로 조정 */
+            right: 10px; 
+            font-size: 0.8rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginFormContainer">
+        <h2>2024 우암축전 복면가왕 <br>투표 로그인 페이지</h2>
+		<!-- method="  action="cjds-admin.store/login" 에서 바꿈 -> url 오류 해결  -->
+        <form id="loginForm" action="/login/" method="post">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="number">학번</label>
+            <input type="number" id="number" name="number" required><br>
+            <button type="submit">로그인</button>
+        </form>
+        <div class="footer-text">made by admin</div>
+    </div>
+</body>
+</html>

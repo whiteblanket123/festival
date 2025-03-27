@@ -1,0 +1,11 @@
+1. 파이썬 설치
+2. virtualenv 설치
+3. virtualenv myenv로 가상환경 설정
+(python3 -m venv myenv)
+4. 가상환경 실행
+source /c/Users/PC/Desktop/축제부스/booth/Scripts/activate
+5. 장고 설치
+6. 프로젝트 생성
+django-admin startproject myproject
+7. 앱 생성
+python manage.py startapp myapp

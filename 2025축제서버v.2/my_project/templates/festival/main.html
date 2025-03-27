@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>main page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            padding: 0; 
+            position: relative;
+            overflow: hidden;
+        }
+        #info, #voteForm {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        #info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            width: 60%;
+            height: 30px;
+            align-items: center;
+        }
+        .info-field {
+            margin-bottom: 0rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;   
+        }
+        #voteForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .vote-button {
+            width: 100%;
+            padding: 5.5rem;
+            margin-bottom: 1rem;
+            background-color: #7eafff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+        .vote-button:hover {
+            background-color: #5c84c4;
+        }
+        
+       
+
+        .custom-text {
+        margin-top: 0px; 
+        font-size: 1rem;
+        color: #333;
+        text-align: center;
+    }
+
+        @media (max-width: 480px) { 
+            #info, #voteForm {
+                width: 100%; 
+                padding: 1rem;
+            }
+            .vote-button {
+                padding: 5.5rem;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+  <div class="custom-text"><h1>2024 우암축전<br>복면가왕 투표</h1></div>
+    <div id="info">
+        <div class="info-field"><strong>이름  </strong><span id="displayName"></span></div>
+        <div class="info-field"><strong>학번  </strong><span id="displayNumber"></span></div>
+    </div>
+	<!--  action="cjds-admin.store/submit"  -->
+    <form id="voteForm" action="/submit/" method="post">
+        <input type="hidden" id="name" name="name">
+        <input type="hidden" id="number" name="number">
+        <button type="button" class="vote-button" onclick="submitVote(1)">{{ participant.0.participant1 }}</button>
+        <button type="button" class="vote-button" onclick="submitVote(2)">{{ participant.0.participant2 }}</button>
+    </form>
+    
+
+    <script>
+        function getCookie(name) {
+            // 쿠키 문자열에서 특정 쿠키 값을 찾는 함수
+            var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+            return value ? value[2] : null;
+        }
+    
+        function submitVote(vote) {
+            document.getElementById('voteForm').innerHTML += '<input type="hidden" name="vote" value="' + vote + '">';
+            document.getElementById('voteForm').submit();
+        }
+
+        window.onload = function() {
+            // 페이지 로드 시 쿠키 값 출력
+            var cookie1Value = getCookie('name');
+            var cookie2Value = getCookie('number');
+    
+            document.getElementById('displayName').textContent = decodeURIComponent(cookie1Value);
+            document.getElementById('displayNumber').textContent = cookie2Value;
+            document.getElementById("name").value = decodeURIComponent(cookie1Value);
+            document.getElementById("number").value = cookie2Value;
+        };
+    </script>    
+</body>
+</html>
