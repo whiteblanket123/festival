@@ -52,7 +52,7 @@ def login(request):
             return response
         else:
             return HttpResponse("이름 또는 번호가 잘못되었습니다.", status=401)
-    return render(request, 'frstival/main.html')
+    return render(request, 'festival/main.html')
 
 def result (request):
     vote1_result = Information.objects.filter(vote=1).count()

@@ -83,7 +83,7 @@ DATABASES = {
         'PASSWORD': 'root123',    # MySQL 비밀번호
         'HOST': 'localhost',         # 데이터베이스 호스트 (로컬일 경우 localhost)
         'PORT': '3306',                 # MySQL 기본 포트
-        'CONN_MAX_AGE': 60,   
+        'CONN_MAX_AGE': 0,
     }
 }
 
