@@ -1,0 +1,16 @@
+CREATE TABLE `information` (
+    `id` int NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+    `name` varchar(255) DEFAULT NULL,
+    `number` int DEFAULT NULL,
+    `vote` int DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 4 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci
+
+
+
+CREATE TABLE `participant` (
+    `id` int NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+    `participant1` varchar(255) DEFAULT NULL,
+    `participant2` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 2 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci
