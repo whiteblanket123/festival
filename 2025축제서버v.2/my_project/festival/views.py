@@ -47,8 +47,8 @@ def login(request):
 
         if user:
             response = redirect('/mainpage/')
-            response.set_cookie('name', name, httponly= False)
-            response.set_cookie('number', number)
+            response.set_cookie('name', name, httponly= False, max_age=1800)
+            response.set_cookie('number', number, max_age=1800)
             return response
         else:
             return HttpResponse("이름 또는 번호가 잘못되었습니다.", status=401)
