@@ -1,5 +1,99 @@
-<form>
-    <p>
-        투표가 완료되었습니다.
-    </p>
-    </form>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>투표 완료! 🎉</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0; /* 로그인 페이지와 동일한 배경색 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* 화면 전체 높이 사용 */
+            margin: 0;
+            padding: 0; /* 로그인 페이지와 동일하게 패딩 제거 */
+            flex-direction: column; /* 로그인 페이지처럼 세로 정렬 */
+            position: relative;
+            overflow: hidden;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 1.5rem; /* 로그인 페이지와 동일한 패딩 */
+            border-radius: 8px; /* 로그인 페이지와 동일한 둥근 모서리 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 로그인 페이지와 동일한 그림자 */
+            text-align: center;
+            max-width: 400px; /* 적당한 최대 너비 설정 */
+            width: 90%; /* 반응형을 위해 퍼센트도 추가 */
+        }
+
+        h1 {
+            color: #5c84c4; /* 로그인 버튼 호버색과 비슷한 파란색 계열 */
+            margin-bottom: 20px;
+            font-size: 2.2em; /* 제목 크기 조절 */
+            animation: fadeIn 1s ease-out;
+        }
+
+        p {
+            font-size: 1.1em; /* 문단 글자 크기 살짝 조절 */
+            margin-bottom: 30px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            animation: fadeIn 1.4s ease-out;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #7eafff; /* 로그인 버튼과 동일한 색상 */
+            color: white;
+            padding: 12px 25px; /* 버튼 패딩 조절 */
+            border-radius: 4px; /* 로그인 버튼과 동일한 둥근 모서리 */
+            text-decoration: none;
+            font-size: 1em;
+            margin: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #5c84c4; /* 로그인 버튼 호버와 동일한 색상 */
+            transform: translateY(-2px);
+        }
+
+        /* 간단한 애니메이션 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 미디어 쿼리도 로그인 페이지와 비슷하게 적용 */
+        @media (max-width: 480px) {
+            .container {
+                width: 95%; /* 모바일에서 너비 더 넓게 */
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>투표 완료! 🎉</h1>
+        <p>이윤수님, 소중한 한 표 정말 감사합니다! 투표가 성공적으로 완료됐어요. 🫡</p>
+        <div class="buttons">
+            <a href="/mainpage" class="btn">다시 투표하기</a>
+        </div>
+    </div>
+</body>
+</html>
