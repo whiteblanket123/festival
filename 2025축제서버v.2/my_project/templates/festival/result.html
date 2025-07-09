@@ -1,1 +1,162 @@
-<p>{{ text }}</p>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>투표 결과</title>
+    <!-- 스타일 시트는 이전과 동일 -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #resultContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            gap: 20px;
+        }
+
+        #voteCounts {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .vote-box {
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            text-align: center;
+            min-width: 250px;
+        }
+
+        .vote-box h3 {
+            color: #555;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .vote-count {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #7eafff;
+            margin-top: 1rem;
+        }
+
+        #overallResult {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #overallResult h2 {
+            color: #333;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .custom-text {
+            font-size: 1.8rem;
+            color: #333;
+            font-weight: bold;
+            line-height: 1.4;
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            #voteCounts {
+                flex-direction: column;
+            }
+            .vote-box {
+                width: 100%;
+                min-width: unset;
+            }
+            #overallResult {
+                margin-top: 0;
+            }
+            .vote-box h3 {
+                font-size: 1.3rem;
+            }
+            .vote-count {
+                font-size: 2.8rem;
+            }
+            #overallResult h2 {
+                font-size: 1.8rem;
+            }
+            .custom-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="resultContainer">
+        <h2>🗳️ 최종 투표 결과 🗳️</h2>
+
+        <div id="voteCounts">
+            <div class="vote-box">
+                <h3>{{ participant.participant1 }}</h3> <!-- 이 부분은 변경 없음 (초기 로드 시 값 사용) -->
+                <p id="vote1Count" class="vote-count">{{ a_vote_result }}표</p>
+            </div>
+
+            <div class="vote-box">
+                <h3>{{ participant.participant2 }}</h3> <!-- 이 부분은 변경 없음 (초기 로드 시 값 사용) -->
+                <p id="vote2Count" class="vote-count">{{ b_vote_result }}표</p>
+            </div>
+        </div>
+
+        <div id="overallResult">
+            <p id="participantText" class="custom-text">{{ participant_text }}</p> <!-- 이 부분은 변경 없음 (초기 로드 시 값 사용) -->
+        </div>
+    </div>
+
+    <script>
+        const vote1CountElement = document.getElementById('vote1Count');
+        const vote2CountElement = document.getElementById('vote2Count');
+        // const participantTextElement = document.getElementById('participantText'); // <<<< 이 줄 제거!
+
+        function updateVoteResults() {
+            fetch('/api/vote-results/')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    vote1CountElement.textContent = data.a_vote_result + '표';
+                    vote2CountElement.textContent = data.b_vote_result + '표';
+                    // participantTextElement.textContent = data.participant_text; // <<<< 이 줄 제거!
+                })
+                .catch(error => {
+                    console.error('투표 결과 업데이트 중 오류 발생:', error);
+                });
+        }
+
+        // 페이지 로드 시 한 번 실행
+        updateVoteResults();
+        // 1초마다 업데이트
+        setInterval(updateVoteResults, 1000);
+    </script>
+</body>
+</html>

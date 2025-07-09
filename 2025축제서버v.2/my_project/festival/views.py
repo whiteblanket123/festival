@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Information, Participant
 import urllib.parse
 from django.shortcuts import render
@@ -57,18 +57,32 @@ def login(request):
 def result (request):
     vote1_result = Information.objects.filter(vote=1).count()
     vote2_result = Information.objects.filter(vote=2).count()
-    participant = Participant.objects.get(id = 1)
+    participant = Participant.objects.get(id=1)
+
+
     if vote1_result > vote2_result:
-        text = f"{participant.participant1}, {vote1_result} : {participant.participant2}, {vote2_result}으로 {participant.participant1}가 이겼습니다"
-    elif vote1_result == vote2_result:
-        text = f"{participant.participant1}, {vote1_result} : {participant.participant2}, {vote2_result}으로 무승부입니다"
+        participant_text = f"{participant.participant1}가 이겼습니다"
+    elif vote1_result < vote2_result:
+        participant_text = f"{participant.participant2}가 이겼습니다"
     else:
-        text = f"{participant.participant1}, {vote1_result} : {participant.participant2}, {vote2_result}으로 {participant.participant2}가 이겼습니다"
-    return render(request, 'festival/result.html', {'text' : text})
+        participant_text = "무승부입니다"
+
+
+    return render(request, 'festival/result.html', {'a_vote_result' : vote1_result, 'b_vote_result': vote2_result, 'participant_text': participant_text, 'participant': participant})
+
+def get_vote_results_api(request):
+    vote1_result = Information.objects.filter(vote=1).count()
+    vote2_result = Information.objects.filter(vote=2).count()
+
+    data = {
+        'a_vote_result': vote1_result,
+        'b_vote_result': vote2_result,
+    }
+    return JsonResponse(data)
 
 def reset (request):
     Information.objects.update(vote = None)
     vote1_result = Information.objects.filter(vote=1).count()
     vote2_result = Information.objects.filter(vote=2).count()
     text = f"1번 투표 {vote1_result}, 2번 투표 {vote2_result} 리셋 결과"
-    return render(request, 'festival/result.html', {'text': text})
+    return render(request, 'festival/reset.html', {'text': text})

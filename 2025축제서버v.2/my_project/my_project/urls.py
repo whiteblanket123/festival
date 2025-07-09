@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from festival.views import submit, success_view, login_page, main_page, login, result, reset
+from festival.views import submit, success_view, login_page, main_page, login, result, reset, get_vote_results_api
 import atexit
 from django.db import connections
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path('login/', login, name= 'login'),
     path('result/', result, name= 'result'),
     path('reset/', reset, name='reset'),
+    path('api/vote-results/',get_vote_results_api,name='get_vote_results_api')
 ]
 
 @atexit.register
